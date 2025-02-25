@@ -14,6 +14,7 @@
 # umask
 umask = 0o022
 progress = true
+
 {{ $computer := promptStringOnce . "computer" "computer type (work/self)" }}
 
 encryption = "gpg"
@@ -59,4 +60,3 @@ name   = "Jacob L"
   email  = "{{ (bitwarden "item" "6978dca2-d0c5-4324-b7fc-b28f0144b864").identity.email }}"
   gpg_id = "{{ (bitwardenFields "item" "6978dca2-d0c5-4324-b7fc-b28f0144b864").gpg_key_public.value }}"
 {{- end }}
-
