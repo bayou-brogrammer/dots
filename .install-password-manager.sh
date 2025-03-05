@@ -7,9 +7,7 @@ case "$(uname -s)" in
 Darwin)
   brew install bitwarden-cli
   ;;
-Linux)
-  brew install bitwarden-cli
-  ;;
+Linux) ;;
 *)
   echo "unsupported OS"
   exit 1
