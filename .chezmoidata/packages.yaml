@@ -2,4 +2,3 @@ packages:
   darwin:
     brews:
       - "git"
-    casks:

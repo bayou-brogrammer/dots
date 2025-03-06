@@ -16,15 +16,19 @@ umask = 0o022
 progress = true
 
 {{ $computer := promptStringOnce . "computer" "computer type (work/self)" }}
+{{ $installRust := promptBoolOnce . "installRust" "Do you want to install rust?" }}
 
-encryption = "gpg"
-[gpg]
-args = ["--quiet"]
-recipient = "93AFDAD010B3CB8D"
-
+encryption = "age"
+[age]
+    identity = "~/.config/chezmoi/key.txt"
+    recipient = "age1qaspjxzeyddnz6mwdkwpl72jdnclfkdw6x68tz7xldn2h5pwt44qzk427q"
 
 [hooks.read-source-state.pre]
-    command = ".local/share/chezmoi/.install-password-manager.sh"
+    command = ".local/share/chezmoi/scripts/install_brew_packages.sh"
+
+[edit]
+    command = "nvim"
+    args = [""]
 
 [git]
 autoCommit = false
@@ -39,6 +43,7 @@ args = ["-d", "{{ "{{" }} .Destination }}", "{{ "{{" }} .Source }}"]
 
 [data]
 computer = {{ $computer | quote }}
+installRust = {{ $installRust }}
 
 # [data.git]
 # {{- if eq $computer "work" }}
@@ -53,7 +58,7 @@ name   = "Jacob L"
 
 {{- if eq $computer "work" }}
   email  = "{{ (bitwarden "item" "6978dca2-d0c5-4324-b7fc-b28f0144b864").identity.email }}"
-  gpg_id = "{{ (bitwardenFields "item" "6978dca2-d0c5-4324-b7fc-b28f0144b864").gpg_key_public.value }}"
+  gpg_id = "550DB688EA29D06244C359D76D2F4592BD5690D7"
 {{- end }}
 
 {{- if eq $computer "self" }}
